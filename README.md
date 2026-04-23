@@ -222,4 +222,4 @@ MIT — see [LICENSE](./LICENSE).
 
 Built as the companion repo for Elliot Roazen's _Antagonistic Agents in Account Building_ talk (NYC GTM 2026). The talk explains the motivation and the GTM instantiation; this repo is the general-purpose implementation.
 
-Contact: elliot@prescientai.com · [linkedin.com/in/elliotroazen](https://linkedin.com/in/elliotroazen)
+[linkedin.com/in/elliotroazen](https://linkedin.com/in/elliotroazen)
