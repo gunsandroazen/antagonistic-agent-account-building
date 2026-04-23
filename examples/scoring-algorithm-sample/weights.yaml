@@ -1,0 +1,67 @@
+# TWEAK THIS. These weights are a starting hypothesis, not gospel.
+# Your judgment beats the LLM's.
+#
+# Total possible score when all positive rules return True ≈ 145.
+# Disqualifier rules zero out the score via large negative weights.
+
+rules:
+  # Firmographic
+  headcount_in_target_band:
+    weight: 25
+    type: boolean
+    description: "Headcount 50-300"
+  hq_in_northeast:
+    weight: 20
+    type: boolean
+    description: "HQ in US Northeast"
+  is_venture_backed:
+    weight: 15
+    type: boolean
+    description: "Private + Series A-C"
+  in_target_industry:
+    weight: 15
+    type: boolean
+    description: "MarTech / Analytics / Data Infra / Fintech"
+
+  # Tech stack (strongest single signal)
+  has_segment_in_stack:
+    weight: 30
+    type: boolean
+    description: "Segment in tech stack"
+  has_modern_data_stack:
+    weight: 20
+    type: boolean
+    description: "Snowflake + dbt together"
+
+  # Disqualifiers
+  is_public:
+    weight: -1000
+    type: boolean
+    description: "Disqualifier: public company"
+  is_non_us:
+    weight: -1000
+    type: boolean
+    description: "Disqualifier: non-US HQ"
+
+  # LLM-assisted
+  sells_to_data_teams:
+    weight: 20
+    type: llm
+    description: "Sells to data/analytics/eng buyer"
+  modern_brand_positioning:
+    weight: 10
+    type: llm
+    description: "Modern / developer-friendly positioning"
+
+# Tier thresholds
+tiers:
+  sense_check_threshold: 0.80   # at least 80% of Closed-Won must land in T1 or T2
+  t1:
+    percentile_min: 0.99
+    named_accounts_file: null
+  t2:
+    percentile_min: 0.90
+  t3:
+    percentile_min: 0.60
+  t4:
+    score_floor: 10

@@ -1,0 +1,31 @@
+company_name,domain,headcount,hq_city,hq_state,hq_country,industry,funding_stage,ownership_type,tech_stack,estimated_arr_usd,closed_won_date
+Acme Growth,acmegrowth.com,120,New York,NY,US,SaaS,Series B,Private,"Segment,Snowflake,dbt",2400000,2025-01-14
+Beacon Analytics,beacon.io,85,Boston,MA,US,Analytics,Series A,Private,"Segment,Looker",1200000,2025-01-28
+Compass Retail,compassretail.com,230,Brooklyn,NY,US,Retail Tech,Series B,Private,"Segment,Snowflake,Heap",3100000,2025-02-03
+Driftwood AI,driftwood.ai,45,San Francisco,CA,US,AI,Seed,Private,"Segment,Hex",450000,2025-02-11
+Everbloom Labs,everbloom.co,180,New York,NY,US,MarTech,Series B,Private,"Segment,Snowflake,dbt,Census",2800000,2025-02-19
+Fathom Data,fathomdata.com,95,Brooklyn,NY,US,Data Infra,Series A,Private,"Snowflake,dbt",1600000,2025-02-26
+Glowforge SaaS,glowforge-saas.com,310,Chicago,IL,US,SaaS,Series C,Private,"Segment,Snowflake",4200000,2025-03-04
+Harbor Pay,harborpay.com,140,New York,NY,US,Fintech,Series B,Private,"Segment,Snowflake,Heap",2500000,2025-03-09
+Indigo CX,indigocx.com,65,Cambridge,MA,US,CX,Series A,Private,"Segment,Looker",980000,2025-03-14
+Juno Cloud,junocloud.io,220,New York,NY,US,DevTools,Series B,Private,"Segment,Snowflake,dbt",3000000,2025-03-20
+Kite ML,kite-ml.com,50,San Francisco,CA,US,AI,Seed,Private,"Segment,Hex",600000,2025-03-25
+Lantern Grow,lanterngrow.com,175,Jersey City,NJ,US,MarTech,Series B,Private,"Segment,Snowflake,Census",2700000,2025-04-02
+Mercury Ops,mercuryops.com,110,Boston,MA,US,DevOps,Series A,Private,"Segment,Snowflake",1800000,2025-04-08
+Northwind Data,northwind.io,260,New York,NY,US,Data Infra,Series C,Private,"Snowflake,dbt,Hightouch",3800000,2025-04-15
+Onyx Retention,onyxretention.com,75,Manhattan,NY,US,MarTech,Series A,Private,"Segment,Looker,Heap",1100000,2025-04-21
+Paloma Commerce,palomacommerce.com,195,New York,NY,US,Commerce,Series B,Private,"Segment,Snowflake,dbt",2900000,2025-05-01
+Quill Insights,quillinsights.com,130,Brooklyn,NY,US,Analytics,Series B,Private,"Segment,Snowflake,dbt,Hex",2300000,2025-05-09
+Ripple Checkout,ripplecheckout.com,85,New York,NY,US,Fintech,Series A,Private,"Segment,Heap",1400000,2025-05-14
+Sable Tracking,sabletracking.com,155,Boston,MA,US,Analytics,Series B,Private,"Segment,Snowflake",2600000,2025-05-22
+Turret Security,turretsec.com,290,Austin,TX,US,Security,Series C,Private,"Segment,Snowflake",3500000,2025-06-03
+Umbra Mail,umbramail.com,70,New York,NY,US,MarTech,Series A,Private,"Segment,Looker",1050000,2025-06-10
+Verve Analytics,verve-analytics.com,200,Cambridge,MA,US,Analytics,Series B,Private,"Segment,Snowflake,dbt,Hex",2850000,2025-06-17
+Willow Pay,willowpay.com,115,New York,NY,US,Fintech,Series B,Private,"Segment,Snowflake",2200000,2025-06-24
+Xenon Attribution,xenonattribution.com,165,Brooklyn,NY,US,MarTech,Series B,Private,"Segment,Snowflake,dbt,Census",2750000,2025-07-01
+Yarrow CDP,yarrow-cdp.com,105,Boston,MA,US,MarTech,Series A,Private,"Segment,Snowflake",1700000,2025-07-08
+Zephyr Pipelines,zephyrpipes.com,240,New York,NY,US,Data Infra,Series C,Private,"Snowflake,dbt,Hightouch,Census",3600000,2025-07-15
+Atlas Personalize,atlaspersonalize.com,90,Jersey City,NJ,US,MarTech,Series A,Private,"Segment,Heap,Looker",1350000,2025-07-23
+Bramble Forecast,brambleforecast.com,135,New York,NY,US,Analytics,Series B,Private,"Segment,Snowflake,dbt",2450000,2025-07-30
+Cirrus Warehouse,cirruswarehouse.com,210,Brooklyn,NY,US,Data Infra,Series B,Private,"Snowflake,dbt",3100000,2025-08-06
+Delta Retain,deltaretain.com,80,Boston,MA,US,MarTech,Series A,Private,"Segment,Looker,Heap",1250000,2025-08-13
