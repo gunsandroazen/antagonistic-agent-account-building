@@ -107,9 +107,11 @@ Tiers are a hypothesis. GTM results are inputs back into the system. Re-run the 
 
 ```
 .
-├── .claude/skills/                 # the 5 skills
+├── .claude/skills/                 # the 6 skills
+│   ├── data-audit/                 # pre-flight CSV quality check (runs automatically)
 │   ├── pattern-recognition/
 │   ├── antagonist/
+│   │   └── baselines/              # B2B population baselines for base-rate tests
 │   ├── pattern-antagonist-loop/
 │   ├── account-search/
 │   │   └── providers/              # one .md per provider — drop yours in
@@ -136,12 +138,13 @@ Tiers are a hypothesis. GTM results are inputs back into the system. Re-run the 
 
 | Skill | Reads | Writes |
 |---|---|---|
-| `pattern-recognition` | `data/closed-won/*.csv` | `data/patterns/candidates.json` |
-| `antagonist` | `data/patterns/candidates.json` | `data/patterns/survivors.json` |
-| `pattern-antagonist-loop` | `data/closed-won/*.csv` | `data/target-description.md` |
-| `account-search` | `data/target-description.md` | `data/accounts-raw/*.csv` |
-| `account-scoring` (generate) | `data/target-description.md` | `scoring/rules.py, rules.md, weights.yaml` |
-| `account-scoring` (run) | `scoring/*`, `data/accounts-raw/*.csv` | `data/accounts-scored/tiered.csv` |
+| `data-audit` | `data/closed-won/*.csv` | `data/closed-won/.data-audit.json` (severity + findings) |
+| `pattern-recognition` | `data/closed-won/*.csv`, audit JSON | `data/patterns/candidates.json` (with Wilson CIs, lift, provenance) |
+| `antagonist` | `data/patterns/candidates.json`, baselines JSON | `data/patterns/survivors.json` (kept + killed w/ failed-test + evidence) |
+| `pattern-antagonist-loop` | `data/closed-won/*.csv` | `data/patterns/*-r{1,2,3}.json` + `data/target-description.md` |
+| `account-search` | `data/target-description.md` | `data/accounts-raw/<provider>-<ts>.csv`, `deduped-<ts>.csv`, `manifest.json` |
+| `account-scoring` (generate) | `data/target-description.md`, `data/closed-won/*.csv` | `scoring/rules.py, rules.md, weights.yaml` (empirically calibrated) |
+| `account-scoring` (run) | `scoring/*`, `data/accounts-raw/*.csv` | `data/accounts-scored/tiered.csv`, `closed-won-sense-check.csv`, `run-manifest.json` |
 
 ---
 
