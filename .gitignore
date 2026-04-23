@@ -43,3 +43,16 @@ env/
 *.pem
 *.key
 secrets/
+
+# User data — never commit real Closed-Won or account lists
+/data/*
+/data/**/*
+!/data/
+!/data/*/
+!/data/**/.gitkeep
+
+# User-generated scoring algorithm — user forks commit these to their own fork,
+# but the upstream template repo ships with scoring/ empty
+/scoring/*
+!/scoring/
+!/scoring/.gitkeep
