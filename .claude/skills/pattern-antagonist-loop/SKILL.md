@@ -1,27 +1,32 @@
 ---
 name: pattern-antagonist-loop
-description: Use when the user has an enriched Closed-Won CSV in data/closed-won/ and wants the full pattern↔antagonist fight run end-to-end. Orchestrates data-audit → pattern-recognition → antagonist for up to 3 rounds with explicit grudge prompts that force the pattern agent to defend kills and surface interactions it missed. Detects convergence, writes per-round artifacts, synthesizes the final target-description.md with full round log, and supports per-segment runs when the CSV has a segment column. Deterministic orchestration — no agreeable shortcuts.
+description: End-to-end orchestrator. Runs business-context → data-audit → pattern-recognition → antagonist for up to 3 rounds with explicit grudge prompts, detects convergence, writes per-round artifacts, and synthesizes data/target-description.md with a full round log. Handles segmentation when the data warrants it. Works on any tabular data analysis — the industry-agnostic pattern-recognition + antagonist pipeline adjudicates relevance against the user's business context. Deterministic orchestration — no agreeable shortcuts.
 ---
 
 # Pattern-Antagonist Loop Skill
 
 ## Your role
 
-Orchestrate the fight. Run up to 3 rounds. Force real adversarial pressure in rounds 2 and 3. Converge early when further rounds won't find more signal. Synthesize a target-description.md that a GTM operator can audit, not just accept.
+Orchestrate the fight. Ensure context exists before starting. Run up to 3 adversarial rounds. Converge early. Synthesize a target-description the user can audit.
 
-You are a conductor, not a player — this skill drives the other skills but does not itself analyze patterns or prosecute them.
+You are a conductor — this skill drives the other skills but does not itself discover patterns or prosecute them.
 
 ---
 
 ## Preconditions
 
-1. `data/closed-won/` contains exactly one `.csv` file. If zero, STOP. If multiple, tell the user to pick one.
-2. `data/closed-won/.data-audit.json` exists AND has `severity != "critical"`. If it doesn't exist, invoke the `data-audit` skill first. If critical, STOP and surface the blockers.
-3. `.claude/skills/antagonist/baselines/b2b-population-baselines.json` exists (shipped with the repo).
+1. **Business context exists.** `data/business-context.md` must exist. If it does not, invoke the `business-context` skill first (interactive mode) and wait for it to complete.
+2. **CSV is present and audited.** The user has a CSV they want to analyze. Default location is `data/closed-won/` with exactly one `.csv`. If the user provides a different path, use it. If zero CSVs or multiple at the default location and no explicit path, STOP and ask.
+3. **Audit clean.** `data/closed-won/.data-audit.json` (or the equivalent at the user's path) exists AND has `severity != "critical"`. If it doesn't exist, invoke the `data-audit` skill. If critical, STOP and surface the blockers.
+4. **Baselines available.** Either `data/baselines.json` (user-provided) or the shipped `.claude/skills/antagonist/baselines/b2b-population-baselines.json` exists. If business-context.md indicates a non-B2B customer entity type and no user baselines exist, WARN that shipped baselines may not apply.
 
 ---
 
 ## Orchestration sequence
+
+### Stage -1 — Context check
+
+If `data/business-context.md` is missing, say: *"No business-context.md found. Running /skill business-context first — this is the ground truth the antagonist uses to judge relevance."* Then invoke `business-context`. After it completes, proceed.
 
 ### Stage 0 — Audit
 

@@ -25,11 +25,14 @@ Binary verdicts. No maybes. Short reasoning. If the pattern would not change a s
    - Else try `data/patterns/candidates.json`.
    - Else search for `*.patterns.json` in the CWD and use the most recent.
    - Else STOP.
-2. Read `.claude/skills/antagonist/baselines/b2b-population-baselines.json`. This file contains rough B2B population frequencies for common dimensions. Used for the base-rate test. When a dimension is missing, fall back to stricter raw-threshold logic (Test 2c).
-3. **Read the relevance context** (optional but recommended). Resolution order:
-   - If `data/patterns/relevance-context.md` exists, use it. This file states the decision the user is trying to make (e.g., "account targeting for outbound GTM"), constraints (e.g., "US only, B2B SaaS"), and what "actionable" means for their stack (e.g., "filterable in Apollo or Ocean").
-   - Else fall back to the default relevance context: **B2B GTM account targeting** — the decision is "should we target companies matching this pattern," and actionability means "filterable by a modern GTM database (Apollo, Ocean, Clay, Databar, Exa, FullEnrich, Store Leads) or convertible to an LLM classification rule."
-   - The relevance context is informational — always declare which context you used in the output JSON under `relevance_context_source`.
+2. **Read the baselines** for the base-rate test. Resolution order:
+   - If `data/baselines.json` exists (user-provided for their specific industry/vertical), prefer it. Forkers analyzing non-GTM or non-B2B data should provide their own baselines here.
+   - Else read `.claude/skills/antagonist/baselines/b2b-population-baselines.json` (shipped with the repo — rough B2B frequencies for ownership, funding, headcount, US states, industries, tech stack). If the user's business-context.md indicates a non-B2B customer entity type (consumer, household, government), WARN that the shipped baselines may not apply and increase reliance on the stricter raw-threshold fallback.
+   - When a specific dimension is missing from whichever baseline source applies, fall back to Test 2c (stricter raw thresholds).
+3. **Read the business context** — this is what you adjudicate relevance against. Resolution order:
+   - If `data/business-context.md` exists, read it. This is the user's own description of their business, customers, decision being informed, actionability constraints, known confounders, and disqualifiers. It was produced by the `business-context` skill. The "Downstream instructions for the antagonist" section in that document tells you exactly what counts as a concrete decision, what counts as actionable for their stack, what confounders to watch for, and which reference population applies for base-rate tests.
+   - If `data/business-context.md` does NOT exist, STOP and tell the user: *"No business-context.md found. Run `/skill business-context` first — the antagonist needs the user's own definition of 'relevant' to do its job. Falling back to a generic default would produce generic output, which defeats the point."*
+   - The only exception: if the user explicitly invokes antagonist with `--no-context` or equivalent, fall back to a generic B2B GTM default context (account targeting, major GTM providers as actionability gate, common selection biases from the GTM baseline list). Always declare which context was used in the output JSON under `business_context_source`.
 4. If the pattern evidence includes `sample_row_ids` and the source CSV is readable, you may spot-check suspicious patterns by pulling the actual rows. Not required, but encouraged when a pattern looks oddly strong/weak.
 
 ---
@@ -158,7 +161,8 @@ Write `data/patterns/survivors.json` (or `<candidates_path>.survivors.json` if c
   "generated_at": "ISO-8601",
   "candidates_source": "data/patterns/candidates.json",
   "baselines_source": ".claude/skills/antagonist/baselines/b2b-population-baselines.json",
-  "relevance_context_source": "data/patterns/relevance-context.md | default:gtm_account_targeting",
+  "business_context_source": "data/business-context.md",
+  "baselines_source": "data/baselines.json | .claude/skills/antagonist/baselines/b2b-population-baselines.json",
   "total_evaluated": 324,
   "total_kept": 19,
   "total_killed": 305,
